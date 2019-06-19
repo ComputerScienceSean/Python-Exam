@@ -25,14 +25,19 @@ def intro():
 def startGame(startAmount):
     gameDeck = copy.copy(Cards.deck)
     print('You have ' + str(startAmount) + ' chips to bet with')
-    bet = int(input('How many chips would you like to bet? '))
-    if (bet > startAmount):
+    bet = input('How many chips would you like to bet? ')
+    try:
+        int(bet)
+    except ValueError:
+        print("You need to enter a number try again")
+        startGame(startAmount)
+    if (int(bet) > startAmount):
         print('You can\'t afford that. Try again')
         startGame(startAmount)
-    if (bet < 0):
+    if (int(bet) < 0):
         print('You can\'t do that! Try again')
         startGame(startAmount)
-    if (bet == 0):
+    if (int(bet) == 0):
         print('You need to bet something! Try again!')
         startGame(startAmount)
     print('You have placed a bet of ' + str(bet) + ' chips')
@@ -56,7 +61,7 @@ def keepPlaying(startAmount, bet):
             print('___________________________________________')
             print('                 YOU LOSE!')
             print('___________________________________________')
-            startAmount -= bet
+            startAmount -= int(bet)
             playAgain(startAmount)
         print('You drew a ' + str(playerHand[-1]))
         print('Your score is now: ' + str(playerScore))
@@ -80,13 +85,13 @@ def keepPlaying(startAmount, bet):
             print('___________________________________________')
             print('                 YOU WIN!')
             print('___________________________________________')
-            startAmount += bet
+            startAmount += int(bet)
 
         elif(dealerScore >= playerScore):
             print('___________________________________________')
             print('                 YOU LOSE!')
             print('___________________________________________')
-            startAmount -= bet
+            startAmount -= int(bet)
         playAgain(startAmount)
     if(playOn != 'draw' or playOn != 'stay'):
         print('Unknown command entered. Try again!')
