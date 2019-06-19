@@ -20,7 +20,8 @@ class BlackjackTest(unittest.TestCase):
         Cards.get_card(deck)
         self.assertEqual(len(deck), 48)
 
-
+if __name__ == "__main__":
+        unittest.main()
 
 
         
