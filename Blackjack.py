@@ -58,9 +58,7 @@ def keepPlaying(startAmount, bet):
         if(playerScore >= 22):
             print('You drew a ' + str(playerHand[-1]) + ' which gives you the score of ' + str(playerScore))
             print('You\'ve gotten a score of over 21')
-            print('___________________________________________')
-            print('                 YOU LOSE!')
-            print('___________________________________________')
+            displayResult("lose")
             startAmount -= int(bet)
             playAgain(startAmount)
         print('You drew a ' + str(playerHand[-1]))
@@ -82,15 +80,11 @@ def keepPlaying(startAmount, bet):
         print('The dealer stayed on a score of ' + str(Cards.checkAce(dealerHand)))
 
         if(dealerScore > 21):
-            print('___________________________________________')
-            print('                 YOU WIN!')
-            print('___________________________________________')
+            displayResult("win")
             startAmount += int(bet)
 
         elif(dealerScore >= playerScore):
-            print('___________________________________________')
-            print('                 YOU LOSE!')
-            print('___________________________________________')
+            displayResult("lose")
             startAmount -= int(bet)
         playAgain(startAmount)
     if(playOn != 'draw' or playOn != 'stay'):
@@ -127,9 +121,7 @@ def dealerGame(startAmount):
     if(playerScore >= 22):
         print('The player drew a ' + str(playerHand[-1]) + ' which gives the player the score of ' + str(playerScore))
         print('The player has gotten a score of over 21')
-        print('___________________________________________')
-        print('                 YOU WIN!')
-        print('___________________________________________')
+        displayResult("win")
         startAmount -= bet
         playAgain(startAmount)
 
@@ -152,9 +144,7 @@ def keepPlayingDealer(startAmount, bet, playerScore):
         if(dealerScore >= 22):
             print('You drew a ' + str(dealerHand[-1]) + ' which gives you the score of ' + str(dealerScore))
             print('You\'ve gotten a score of over 21')
-            print('___________________________________________')
-            print('                 YOU LOSE!')
-            print('___________________________________________')
+            displayResult("lose")
             startAmount += bet
             playAgain(startAmount)
         print('You drew a ' + str(dealerHand[-1]))
@@ -165,21 +155,15 @@ def keepPlayingDealer(startAmount, bet, playerScore):
         print('You stayed on ' + str(Cards.checkAce(dealerHand)))
 
         if(Cards.checkAce(dealerHand) > 21):
-            print('___________________________________________')
-            print('                 YOU LOSE!')
-            print('___________________________________________')
+            displayResult("lose")
             startAmount += bet
 
         elif (Cards.checkAce(playerHand) > Cards.checkAce(dealerHand)):
-            print('___________________________________________')
-            print('                 YOU LOSE!')
-            print('___________________________________________')
+            displayResult("lose")
             startAmount += bet
 
         elif(Cards.checkAce(dealerHand) >= Cards.checkAce(playerHand)):
-            print('___________________________________________')
-            print('                 YOU WIN!')
-            print('___________________________________________')
+            displayResult("win")
             startAmount -= bet
         playAgain(startAmount)
     if(playOn != 'draw' or playOn != 'stay'):
@@ -212,6 +196,12 @@ def playAgain(startAmount):
         print('Unknown character. Try again')
         playAgain(startAmount)
     
+
+def displayResult(result):
+    print('_' * 40)
+    print(f'\t\tYOU {result.upper()}!')
+    print('_' * 40)
+
 
 
 
